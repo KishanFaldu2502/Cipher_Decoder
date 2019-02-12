@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Cipher Decoder</string>
+    <string name="edit_plaintext">Enter Your Plain Text</string>
+    <string name="edit_shiftkey">Enter First Shift Key (e.g.:- Less Than 26)</string>
+    <string name="edit_shiftkey1">Enter Second Shift Key</string>
+    <string name="edit_Vigenèrekey">Enter The Letter Or Number</string>
+    <string name="speech_prompt">Say something</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="inst_name"> Darshan Institute of Engineering &amp; Technology</string>
+    <string-array name="dashboard_spinner">
+        <item>-Choose Your Cipher-</item>
+        <item>ASCII</item>
+        <item>Binary</item>
+        <item>Caesar</item>
+        <item>Hexadecimal</item>
+        <item>Rearrange Words Sentences</item>
+        <item>Rearrange Word</item>
+        <item>Atbash</item>
+        <item>Affine</item>
+        <item>Letter Number</item>
+    </string-array>
+</resources>
