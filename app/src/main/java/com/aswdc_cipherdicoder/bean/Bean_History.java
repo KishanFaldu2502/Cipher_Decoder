@@ -1,18 +1,9 @@
 package com.aswdc_cipherdicoder.bean;
 
 public class Bean_History {
-    private int H_Id;
     private String Plain_Text;
     private String Cipher_Method;
     private String Cipher_Result;
-
-    public int getH_Id() {
-        return H_Id;
-    }
-
-    public void setH_Id(int h_Id) {
-        H_Id = h_Id;
-    }
 
     public String getPlain_Text() {
         return Plain_Text;

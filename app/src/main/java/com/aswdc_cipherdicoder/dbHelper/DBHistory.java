@@ -25,7 +25,7 @@ public class DBHistory extends SQLiteAssetHelper{
         db.insert("Cipher_history",null,cv);
         db.close();
     }
-    public ArrayList<Bean_History> selectAll()
+    public ArrayList<Bean_History> gethistory()
     {
         ArrayList<Bean_History> arrayhistory=new ArrayList<Bean_History>();
         SQLiteDatabase db=getReadableDatabase();

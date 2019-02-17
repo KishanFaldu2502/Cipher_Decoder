@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".Activity_Dashboard" />
         <activity android:name=".design.Activity_Developer"></activity>
+        <activity android:name=".design.ActivityHistory"></activity>
     </application>
 
 </manifest>
