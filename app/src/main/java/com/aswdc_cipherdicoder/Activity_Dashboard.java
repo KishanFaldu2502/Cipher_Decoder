@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -49,12 +50,14 @@ public class Activity_Dashboard extends AppCompatActivity {
     TextInputLayout etshift, etshift1;
     TextView tvCipherText;
     Spinner spCipherMethod;
-    ImageButton imgspeech,imgcopy;
+    Button btnconvert;
+    ImageButton imgspeech, imgcopy;
     String[] Cipher;
     int spposition;
     private static final int REQUEST_CODE_PERMISSION = 2;
     private ClipboardManager myClipboard;
     private ClipData myClip;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +94,8 @@ public class Activity_Dashboard extends AppCompatActivity {
         imgcopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myClipboard=(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-                String Text=tvCipherText.getText().toString();
+                myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                String Text = tvCipherText.getText().toString();
                 myClip = ClipData.newPlainText("text", Text);
                 myClipboard.setPrimaryClip(myClip);
                 Toast.makeText(getApplicationContext(), "Text Copied", Toast.LENGTH_SHORT).show();
@@ -112,39 +115,60 @@ public class Activity_Dashboard extends AppCompatActivity {
         spCipherMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                etshiftkey.setText("");
-                etshiftkey1.setText("");
                 spposition = position;
-                if (position==0){
+                if (position == 0) {
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
                     etshift.setVisibility(View.GONE);
                     etshift1.setVisibility(View.GONE);
                 }
                 if (position == 1) {
-                    ascii();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.GONE);
+                    etshift1.setVisibility(View.GONE);
                 }
                 if (position == 2) {
-                    binary();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.VISIBLE);
+                    etshift1.setVisibility(View.GONE);
                 }
                 if (position == 3) {
-                    caesar();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.GONE);
+                    etshift1.setVisibility(View.GONE);
                 }
                 if (position == 4) {
-                    hexaDecimal();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.GONE);
+                    etshift1.setVisibility(View.GONE);
                 }
                 if (position == 5) {
-                    rearrangeWordSentence();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.GONE);
+                    etshift1.setVisibility(View.GONE);
                 }
                 if (position == 6) {
-                    rearrangeWord();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.GONE);
+                    etshift1.setVisibility(View.GONE);
                 }
                 if (position == 7) {
-                    atbash();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.VISIBLE);
+                    etshift1.setVisibility(View.VISIBLE);
                 }
                 if (position == 8) {
-                    affine();
-                }
-                if (position == 9) {
-                    LetterNumber();
+                    etshiftkey.setText("");
+                    etshiftkey1.setText("");
+                    etshift.setVisibility(View.GONE);
+                    etshift1.setVisibility(View.GONE);
                 }
             }
 
@@ -153,85 +177,50 @@ public class Activity_Dashboard extends AppCompatActivity {
 
             }
         });
-        etPlainText.addTextChangedListener(new TextWatcher() {
+        btnconvert.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if (spposition==0){
-                    etshift.setVisibility(View.GONE);
-                    etshift1.setVisibility(View.GONE);
-                }
-                if (spposition == 1) {
+            public void onClick(View v) {
+                position=spCipherMethod.getSelectedItemPosition();
+                if (position == 0) {
                     ascii();
                 }
-                if (spposition == 2) {
+                if (position == 1) {
                     binary();
                 }
-                if (spposition == 3) {
+                if (position == 2) {
                     caesar();
                 }
-                if (spposition == 4) {
+                if (position == 3) {
                     hexaDecimal();
                 }
-                if (spposition == 5) {
+                if (position == 4) {
                     rearrangeWordSentence();
                 }
-                if (spposition == 6) {
+                if (position == 5) {
                     rearrangeWord();
                 }
-                if (spposition == 7) {
+                if (position == 6) {
                     atbash();
                 }
-                if (spposition == 8) {
+                if (position == 7) {
                     affine();
                 }
-                if (spposition == 9) {
+                if (position == 8) {
                     LetterNumber();
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
-        etshiftkey.addTextChangedListener(new TextWatcher() {
+        etPlainText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (spposition == 3) {
-                    caesar();
-                }
-                if (spposition == 8) {
-                    affine();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        etshiftkey1.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (spposition == 8) {
-                    affine();
-                }
+                tvCipherText.setText("");
+                etshiftkey.setText("");
+                etshiftkey1.setText("");
             }
 
             @Override
@@ -245,7 +234,7 @@ public class Activity_Dashboard extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_share, menu);
-        menuInflater.inflate(R.menu.menu_developer,menu);
+        menuInflater.inflate(R.menu.menu_developer, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -257,8 +246,8 @@ public class Activity_Dashboard extends AppCompatActivity {
             store(bitmap);
             shareImage();
         }
-        if (item.getItemId()==R.id.menu_developer){
-            Intent intent=new Intent(Activity_Dashboard.this, Activity_Developer.class);
+        if (item.getItemId() == R.id.menu_developer) {
+            Intent intent = new Intent(Activity_Dashboard.this, Activity_Developer.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -292,10 +281,10 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     private void shareImage() {
-        final Intent shareintent=new Intent(Intent.ACTION_SEND);
+        final Intent shareintent = new Intent(Intent.ACTION_SEND);
         shareintent.setType("image/jpg");
         final String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/Screenshots";
-        final File imagefile=new File(dirPath,"Image-1.jpg");
+        final File imagefile = new File(dirPath, "Image-1.jpg");
         shareintent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imagefile));
         startActivity(Intent.createChooser(shareintent, "Share ScreenShot"));
     }
@@ -309,8 +298,9 @@ public class Activity_Dashboard extends AppCompatActivity {
         etshiftkey = findViewById(R.id.dashboard_et_shiftkey);
         etshiftkey1 = findViewById(R.id.dashboard_et_shiftkey1);
         l1 = findViewById(R.id.dashboard_linear);
-        imgspeech=findViewById(R.id.dashboard_et_microphone);
-        imgcopy=findViewById(R.id.dashboard_tv_copy);
+        imgspeech = findViewById(R.id.dashboard_et_microphone);
+        imgcopy = findViewById(R.id.dashboard_tv_copy);
+        btnconvert = findViewById(R.id.dashboard_btn_convert);
     }
 
     private void promptSpeechInput() {
@@ -345,8 +335,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void ascii() {
-        etshift.setVisibility(View.GONE);
-        etshift1.setVisibility(View.GONE);
         StringBuilder sb = new StringBuilder();
         String plaintext = etPlainText.getText().toString();
         char[] ascii = plaintext.toCharArray();
@@ -359,8 +347,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void binary() {
-        etshift.setVisibility(View.GONE);
-        etshift1.setVisibility(View.GONE);
         String plaintext = etPlainText.getText().toString();
         byte[] bytes = plaintext.getBytes();
         StringBuilder binary = new StringBuilder();
@@ -377,8 +363,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void caesar() {
-        etshift.setVisibility(View.VISIBLE);
-        etshift1.setVisibility(View.GONE);
         final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
         String plaintext = etPlainText.getText().toString().toLowerCase();
         String shiftkey = etshiftkey.getText().toString();
@@ -398,8 +382,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void hexaDecimal() {
-        etshift.setVisibility(View.GONE);
-        etshift1.setVisibility(View.GONE);
         String plaintext = etPlainText.getText().toString();
         StringBuffer hexadecimal = new StringBuffer();
         byte[] bytes = plaintext.getBytes();
@@ -416,16 +398,12 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void rearrangeWordSentence() {
-        etshift.setVisibility(View.GONE);
-        etshift1.setVisibility(View.GONE);
         String plaintext = etPlainText.getText().toString();
         StringBuffer rws = new StringBuffer(plaintext).reverse();
         tvCipherText.setText(rws);
     }
 
     public void rearrangeWord() {
-        etshift.setVisibility(View.GONE);
-        etshift1.setVisibility(View.GONE);
         String plaintext = etPlainText.getText().toString();
         String[] words = plaintext.split(" ");
         String reverseString = "";
@@ -443,8 +421,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void atbash() {
-        etshift.setVisibility(View.GONE);
-        etshift1.setVisibility(View.GONE);
         String plaintext = etPlainText.getText().toString();
         String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String TEBAHPLA = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
@@ -476,8 +452,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void affine() {
-        etshift.setVisibility(View.VISIBLE);
-        etshift1.setVisibility(View.VISIBLE);
         String plaintext = etPlainText.getText().toString();
         char[] msg = plaintext.toCharArray();
         String shiftkey = etshiftkey.getText().toString();
@@ -498,8 +472,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void LetterNumber() {
-        etshift.setVisibility(View.GONE);
-        etshift1.setVisibility(View.GONE);
         String plaintext = etPlainText.getText().toString().toLowerCase();
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
         int position;

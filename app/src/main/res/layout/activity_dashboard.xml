@@ -47,15 +47,6 @@
                     android:src="@mipmap/microphone" />
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:text="Cipher Method"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,6 +54,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:background="#FFFFFF">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Cipher Method:"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
                 <Spinner
                     android:id="@+id/dashboard_sp_ciphermethod"
@@ -127,6 +128,19 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
                 </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/dashboard_btn_convert"
+                    style="@style/Dashboard_button"
+                    android:text="Convert"/>
             </LinearLayout>
 
             <TextView

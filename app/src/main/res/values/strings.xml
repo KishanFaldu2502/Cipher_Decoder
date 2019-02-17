@@ -8,7 +8,6 @@
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="inst_name"> Darshan Institute of Engineering &amp; Technology</string>
     <string-array name="dashboard_spinner">
-        <item>-Choose Your Cipher-</item>
         <item>ASCII</item>
         <item>Binary</item>
         <item>Caesar</item>
