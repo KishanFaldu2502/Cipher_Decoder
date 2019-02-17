@@ -35,6 +35,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aswdc_cipherdicoder.bean.Bean_History;
+import com.aswdc_cipherdicoder.dbHelper.DBHistory;
 import com.aswdc_cipherdicoder.design.Activity_Developer;
 
 import java.io.File;
@@ -58,6 +60,7 @@ public class Activity_Dashboard extends AppCompatActivity {
     private ClipboardManager myClipboard;
     private ClipData myClip;
     int position;
+    DBHistory dh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,7 +183,7 @@ public class Activity_Dashboard extends AppCompatActivity {
         btnconvert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                position=spCipherMethod.getSelectedItemPosition();
+                position = spCipherMethod.getSelectedItemPosition();
                 if (position == 0) {
                     ascii();
                 }
@@ -207,6 +210,20 @@ public class Activity_Dashboard extends AppCompatActivity {
                 }
                 if (position == 8) {
                     LetterNumber();
+                }
+                int flag = 0;
+                Bean_History bh = new Bean_History();
+                if (etPlainText.length() > 0)
+                    bh.setPlain_Text(etPlainText.getText().toString());
+                else {
+                    etPlainText.setError("Enter Your Text");
+                    flag = 1;
+                }
+                bh.setCipher_Method(spCipherMethod.getSelectedItem().toString());
+                bh.setCipher_Result(tvCipherText.getText().toString());
+                if (flag == 0) {
+                    dh.insert(bh);
+                    Toast.makeText(getApplicationContext(), "Saved="+dh.selectAll(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -301,6 +318,7 @@ public class Activity_Dashboard extends AppCompatActivity {
         imgspeech = findViewById(R.id.dashboard_et_microphone);
         imgcopy = findViewById(R.id.dashboard_tv_copy);
         btnconvert = findViewById(R.id.dashboard_btn_convert);
+        dh=new DBHistory(this);
     }
 
     private void promptSpeechInput() {
@@ -367,7 +385,7 @@ public class Activity_Dashboard extends AppCompatActivity {
         String plaintext = etPlainText.getText().toString().toLowerCase();
         String shiftkey = etshiftkey.getText().toString();
         if (TextUtils.isEmpty(shiftkey) || Integer.parseInt(shiftkey) > 26) {
-            Toast.makeText(getApplicationContext(), "Enter Proper Shift Key Value", Toast.LENGTH_SHORT).show();
+            etshiftkey.setError("Enter Proper Shift Key Value");
         } else {
             int shiftkeyval = Integer.parseInt(shiftkey);
             String ciphertext = "";
@@ -457,8 +475,12 @@ public class Activity_Dashboard extends AppCompatActivity {
         String shiftkey = etshiftkey.getText().toString();
         String shiftkey1 = etshiftkey1.getText().toString();
         String cipher = "";
-        if (TextUtils.isEmpty(shiftkey) || TextUtils.isEmpty(shiftkey1)) {
-            Toast.makeText(getApplicationContext(), "Enter Proper Shift Key Value", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(shiftkey)) {
+            etshiftkey.setError("Enter Proper Shift Key Value");
+
+        }
+        if (TextUtils.isEmpty(shiftkey1)) {
+            etshiftkey1.setError("Enter Proper Shift Key Value");
         } else {
             int number = Integer.parseInt(shiftkey);
             int number1 = Integer.parseInt(shiftkey1);
