@@ -35,9 +35,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aswdc_cipherdicoder.bean.Bean_History;
-import com.aswdc_cipherdicoder.dbHelper.DBHistory;
-import com.aswdc_cipherdicoder.design.ActivityHistory;
 import com.aswdc_cipherdicoder.design.Activity_Developer;
 
 import java.io.File;
@@ -61,7 +58,6 @@ public class Activity_Dashboard extends AppCompatActivity {
     private ClipboardManager myClipboard;
     private ClipData myClip;
     int position;
-    DBHistory dh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,20 +208,6 @@ public class Activity_Dashboard extends AppCompatActivity {
                 if (position == 8) {
                     LetterNumber();
                 }
-                int flag = 0;
-                Bean_History bh = new Bean_History();
-                if (etPlainText.length() > 0)
-                    bh.setPlain_Text(etPlainText.getText().toString());
-                else {
-                    etPlainText.setError("Enter Your Text");
-                    flag = 1;
-                }
-                bh.setCipher_Method(spCipherMethod.getSelectedItem().toString());
-                bh.setCipher_Result(tvCipherText.getText().toString());
-                if (flag == 0) {
-                    dh.insert(bh);
-                    Toast.makeText(getApplicationContext(), "Saved="+dh.gethistory(), Toast.LENGTH_SHORT).show();
-                }
             }
         });
         etPlainText.addTextChangedListener(new TextWatcher() {
@@ -267,10 +249,6 @@ public class Activity_Dashboard extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.menu_developer) {
             Intent intent = new Intent(Activity_Dashboard.this, Activity_Developer.class);
-            startActivity(intent);
-        }
-        if (item.getItemId()==R.id.menu_history){
-            Intent intent = new Intent(Activity_Dashboard.this, ActivityHistory.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -324,7 +302,6 @@ public class Activity_Dashboard extends AppCompatActivity {
         imgspeech = findViewById(R.id.dashboard_et_microphone);
         imgcopy = findViewById(R.id.dashboard_tv_copy);
         btnconvert = findViewById(R.id.dashboard_btn_convert);
-        dh=new DBHistory(this);
     }
 
     private void promptSpeechInput() {
