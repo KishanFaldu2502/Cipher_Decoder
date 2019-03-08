@@ -9,7 +9,7 @@
     </style>
 
     <style name="Dashboard_edittext">
-        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">150dp</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_marginTop">@dimen/txt_10</item>
@@ -38,7 +38,7 @@
     </style>
 
     <style name="Dashboard_textview">
-        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">150dp</item>
         <item name="android:layout_marginTop">@dimen/txt_10</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>

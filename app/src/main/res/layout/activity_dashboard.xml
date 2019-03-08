@@ -18,13 +18,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="#FFFFFF">
+                android:background="#FFFFFF"
+                android:orientation="horizontal">
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/text_input_layout"
@@ -36,16 +37,7 @@
                         style="@style/Dashboard_edittext"
                         android:hint="@string/edit_plaintext" />
                 </android.support.design.widget.TextInputLayout>
-
-                <ImageButton
-                    android:id="@+id/dashboard_et_microphone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:background="#FFFFFF"
-                    android:padding="@dimen/txt_5"
-                    android:src="@mipmap/microphone" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -162,7 +154,22 @@
                 <TextView
                     android:id="@+id/dashboard_tv_ciphertext"
                     style="@style/Dashboard_textview" />
-
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_10"
+                android:layout_marginRight="@dimen/txt_10"
+                android:layout_marginTop="@dimen/txt_10">
+                <ImageButton
+                    android:id="@+id/dashboard_et_microphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="#FFFFFF"
+                    android:padding="@dimen/txt_5"
+                    android:layout_margin="@dimen/txt_5"
+                    android:src="@mipmap/microphone" />
                 <ImageButton
                     android:id="@+id/dashboard_tv_copy"
                     android:layout_width="wrap_content"
@@ -170,7 +177,17 @@
                     android:layout_alignParentRight="true"
                     android:background="#FFFFFF"
                     android:padding="@dimen/txt_5"
+                    android:layout_margin="@dimen/txt_5"
                     android:src="@mipmap/copy" />
+                <ImageButton
+                    android:id="@+id/dashboard_tv_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="#FFFFFF"
+                    android:padding="@dimen/txt_5"
+                    android:layout_margin="@dimen/txt_5"
+                    android:src="@mipmap/save" />
             </LinearLayout>
 
         </LinearLayout>
