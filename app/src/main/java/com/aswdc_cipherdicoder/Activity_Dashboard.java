@@ -35,6 +35,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aswdc_cipherdicoder.bean.Bean_History;
+import com.aswdc_cipherdicoder.dbHelper.DBHelper_History;
 import com.aswdc_cipherdicoder.design.Activity_Developer;
 
 import java.io.File;
@@ -51,13 +53,15 @@ public class Activity_Dashboard extends AppCompatActivity {
     TextView tvCipherText;
     Spinner spCipherMethod;
     Button btnconvert;
-    ImageButton imgspeech, imgcopy;
+    ImageButton imgspeech, imgcopy,imgsave;
     String[] Cipher;
     int spposition;
     private static final int REQUEST_CODE_PERMISSION = 2;
     private ClipboardManager myClipboard;
     private ClipData myClip;
     int position;
+    DBHelper_History dbh;
+    Bean_History bh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +103,24 @@ public class Activity_Dashboard extends AppCompatActivity {
                 myClip = ClipData.newPlainText("text", Text);
                 myClipboard.setPrimaryClip(myClip);
                 Toast.makeText(getApplicationContext(), "Text Copied", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        imgsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bh=new Bean_History();
+                if(etPlainText.getText().length()>0 && tvCipherText.getText().length()>0)
+                {
+                    bh.setPlain_Text(etPlainText.getText().toString());
+                    bh.setCipher_Method(spCipherMethod.getSelectedItem().toString());
+                    bh.setCipher_Result(tvCipherText.getText().toString());
+                    dbh.insert(bh);
+                    Toast.makeText(Activity_Dashboard.this,"saved="+dbh.getCount(),Toast.LENGTH_SHORT).show();
+
+                }else {
+                    etPlainText.setError("some field is blank");
+                }
             }
         });
 
@@ -301,7 +323,9 @@ public class Activity_Dashboard extends AppCompatActivity {
         l1 = findViewById(R.id.dashboard_linear);
         imgspeech = findViewById(R.id.dashboard_et_microphone);
         imgcopy = findViewById(R.id.dashboard_tv_copy);
+        imgsave=findViewById(R.id.dashboard_tv_save);
         btnconvert = findViewById(R.id.dashboard_btn_convert);
+        dbh=new DBHelper_History(this);
     }
 
     private void promptSpeechInput() {
