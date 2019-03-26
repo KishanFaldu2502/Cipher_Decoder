@@ -19,6 +19,8 @@ public class DBHelper_History extends SQLiteAssetHelper {
         ContentValues cv = new ContentValues();
 
         cv.put("Plain_Text", bh.getPlain_Text());
+        cv.put("Cipher_Method",bh.getCipher_Method());
+        cv.put("Cipher_Result",bh.getCipher_Result());
         db.insert("Cipher_history", null, cv);
         db.close();
     }

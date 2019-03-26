@@ -53,7 +53,7 @@ public class Activity_Dashboard extends AppCompatActivity {
     TextView tvCipherText;
     Spinner spCipherMethod;
     Button btnconvert;
-    ImageButton imgspeech, imgcopy,imgsave;
+    ImageButton imgspeech, imgcopy, imgsave;
     String[] Cipher;
     int spposition;
     private static final int REQUEST_CODE_PERMISSION = 2;
@@ -109,17 +109,20 @@ public class Activity_Dashboard extends AppCompatActivity {
         imgsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bh=new Bean_History();
-                if(etPlainText.getText().length()>0 && tvCipherText.getText().length()>0)
-                {
-                    bh.setPlain_Text(etPlainText.getText().toString());
-                    bh.setCipher_Method(spCipherMethod.getSelectedItem().toString());
-                    bh.setCipher_Result(tvCipherText.getText().toString());
-                    dbh.insert(bh);
-                    Toast.makeText(Activity_Dashboard.this,"saved="+dbh.getCount(),Toast.LENGTH_SHORT).show();
+                bh = new Bean_History();
+                if (etPlainText.getText().length() > 0) {
+                    if (tvCipherText.getText().length() > 0) {
+                        bh.setPlain_Text(etPlainText.getText().toString());
+                        bh.setCipher_Method(spCipherMethod.getSelectedItem().toString());
+                        bh.setCipher_Result(tvCipherText.getText().toString());
+                        dbh.insert(bh);
+                        Toast.makeText(Activity_Dashboard.this, "saved=" + dbh.getCount(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        tvCipherText.setError("Please Convert the value is entered");
+                    }
 
-                }else {
-                    etPlainText.setError("some field is blank");
+                } else {
+                    etPlainText.setError("Enter Plain Text");
                 }
             }
         });
@@ -257,7 +260,7 @@ public class Activity_Dashboard extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_share, menu);
         menuInflater.inflate(R.menu.menu_developer, menu);
-        menuInflater.inflate(R.menu.menu_history,menu);
+        menuInflater.inflate(R.menu.menu_history, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -323,9 +326,9 @@ public class Activity_Dashboard extends AppCompatActivity {
         l1 = findViewById(R.id.dashboard_linear);
         imgspeech = findViewById(R.id.dashboard_et_microphone);
         imgcopy = findViewById(R.id.dashboard_tv_copy);
-        imgsave=findViewById(R.id.dashboard_tv_save);
+        imgsave = findViewById(R.id.dashboard_tv_save);
         btnconvert = findViewById(R.id.dashboard_btn_convert);
-        dbh=new DBHelper_History(this);
+        dbh = new DBHelper_History(this);
     }
 
     private void promptSpeechInput() {
