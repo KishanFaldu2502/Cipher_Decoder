@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="txt_10">10dp</dimen>
+    <dimen name="txt_20">20dp</dimen>
     <dimen name="txt_18">18dp</dimen>
     <dimen name="txt_4">4dp</dimen>
     <dimen name="txt_5">5dp</dimen>
@@ -12,4 +13,5 @@
     <dimen name="txt_8">8dp</dimen>
     <dimen name="txt_3">3dp</dimen>
     <dimen name="txt_2">2dp</dimen>
+    <dimen name="cardelevation">8dp</dimen>
 </resources>

@@ -7,7 +7,12 @@
     <string name="speech_prompt">Say something</string>
     <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="inst_name"> Darshan Institute of Engineering &amp; Technology</string>
+    <string name="tv_plaintext">Plain Text</string>
+    <string name="tv_ciphermethod">Cipher Method</string>
+    <string name="btn_convert">Convert</string>
+    <string name="tv_ciphertext">Cipher Text</string>
     <string-array name="dashboard_spinner">
+        <item>-Select-</item>
         <item>ASCII</item>
         <item>Binary</item>
         <item>Caesar</item>
@@ -18,4 +23,5 @@
         <item>Affine</item>
         <item>Letter Number</item>
     </string-array>
+    <string name="title_activity_caesar">CaesarActivity</string>
 </resources>
