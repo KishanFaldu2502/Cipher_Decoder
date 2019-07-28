@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -22,6 +23,7 @@ public class Activity_Developer extends AppCompatActivity {
     TextView icmail, icweb, icshare, icphone, icapp, icrate, iclike, icupdate,iccopy,tvPrivacy;
     TextView appinfo;
     Toolbar tb;
+    ImageView aswdcimage,darshanimage;
     LinearLayout email, web, call, share, moreapps, rate, likefb, update;
     WebView wvdetail;
     Typeface tf;
@@ -44,6 +46,8 @@ public class Activity_Developer extends AppCompatActivity {
         appinfo = (TextView) findViewById(R.id.dev_tv_appinfo);
         iccopy = (TextView) findViewById(R.id.dev_tv_copy);
         call = (LinearLayout) findViewById(R.id.dev_call);
+        aswdcimage=(ImageView)findViewById(R.id.aswdcimage);
+        darshanimage=(ImageView)findViewById(R.id.darshanimage);
 
         tf = Typeface.createFromAsset(getAssets(), "fontawesome-webfont.ttf");
         icmail.setTypeface(tf);
@@ -91,6 +95,20 @@ public class Activity_Developer extends AppCompatActivity {
             public void onClick(View v) {
                 Intent webintent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.darshan.ac.in"));
                 startActivity(webintent);
+            }
+        });
+        aswdcimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent aswdcIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://aswdc.in"));
+                startActivity(aswdcIntent);
+            }
+        });
+        darshanimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent darshanintent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://darshan.ac.in"));
+                startActivity(darshanintent);
             }
         });
         share.setOnClickListener(new View.OnClickListener() {

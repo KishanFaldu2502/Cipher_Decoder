@@ -12,7 +12,7 @@
     <string name="btn_convert">Convert</string>
     <string name="tv_ciphertext">Cipher Text</string>
     <string-array name="dashboard_spinner">
-        <item>-Select-</item>
+        <item>-Select Cipher Method-</item>
         <item>ASCII</item>
         <item>Binary</item>
         <item>Caesar</item>

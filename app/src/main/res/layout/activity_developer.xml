@@ -234,6 +234,7 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
+                            android:id="@+id/aswdcimage"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_weight="2"
@@ -241,6 +242,7 @@
                             android:src="@drawable/logo_aswdc" />
 
                         <ImageView
+                            android:id="@+id/darshanimage"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_weight="1"
