@@ -6,15 +6,11 @@
             <item>
                 <shape android:shape="rectangle">
 
-                    <padding
-                        android:left="@dimen/txt_4"
-                        android:top="@dimen/txt_4"
-                        android:right="@dimen/txt_4"
-                        android:bottom="@dimen/txt_4"/>
+                    <padding android:bottom="@dimen/txt_4" android:left="@dimen/txt_4" android:right="@dimen/txt_4" android:top="@dimen/txt_4" />
 
                     <stroke android:width="5px" />
 
-                    <corners android:radius="@dimen/txt_5"/>
+                    <solid android:color="#ffffff"/>
 
                 </shape>
             </item>
