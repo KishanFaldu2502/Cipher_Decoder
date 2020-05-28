@@ -20,12 +20,12 @@
     <style name="Dashboard_spinner">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">2</item>
         <item name="android:layout_marginTop">@dimen/txt_20</item>
         <item name="android:layout_marginBottom">@dimen/txt_20</item>
         <item name="android:paddingLeft">@dimen/txt_10</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
-        <item name="android:drawableRight">@mipmap/spinner_arrow</item>
+        <item name="android:background">@drawable/border_spinner</item>
     </style>
 
     <style name="Dashboard_textview">

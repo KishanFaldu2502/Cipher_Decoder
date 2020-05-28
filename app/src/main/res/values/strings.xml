@@ -1,18 +1,14 @@
 <resources>
     <string name="app_name">Cipher Decoder</string>
-    <string name="edit_plaintext">Enter Your Plain Text</string>
+    <string name="edit_plaintext">Enter Plain Text</string>
     <string name="edit_shiftkey">Enter First Shift Key (e.g.:- Less Than 26)</string>
     <string name="edit_shiftkey1">Enter Second Shift Key</string>
     <string name="edit_Vigenèrekey">Enter The Letter Or Number</string>
-    <string name="speech_prompt">Say something</string>
-    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
     <string name="inst_name"> Darshan Institute of Engineering &amp; Technology</string>
-    <string name="tv_plaintext">Plain Text</string>
-    <string name="tv_ciphermethod">Cipher Method</string>
-    <string name="btn_convert">Convert</string>
+    <string name="tv_ciphermethod">Choose Method</string>
     <string name="tv_ciphertext">Cipher Text</string>
     <string-array name="dashboard_spinner">
-        <item>-Select Cipher Method-</item>
+        <item>-Select-</item>
         <item>ASCII</item>
         <item>Binary</item>
         <item>Caesar</item>

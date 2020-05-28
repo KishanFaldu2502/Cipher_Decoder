@@ -1,28 +1,33 @@
 package com.aswdc_cipherdicoder;
 
-import android.Manifest;
+import  android.Manifest;
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.test.mock.MockPackageManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -38,10 +43,12 @@ import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 public class Activity_Dashboard extends AppCompatActivity {
 
     private final int REQ_CODE_SPEECH_INPUT = 100;
-    EditText etPlainText;
+    EditText etPlainText,etcaesarkey,etaffinekey1,etaffinekey2;
     TextView tvCipherText;
     Spinner spCipherMethod;
+    Button btncaesar,btnaffine;
     ImageView imgcopy,imgpaste,imgcancel,imgcopy1;
+    Dialog dialog;
     String[] Cipher;
     int spposition;
     private static final int REQUEST_CODE_PERMISSION = 2;
@@ -67,6 +74,7 @@ public class Activity_Dashboard extends AppCompatActivity {
         }
 
         init();
+
         tvCipherText.setMovementMethod(new ScrollingMovementMethod());
         Cipher = getResources().getStringArray(R.array.dashboard_spinner);
         ArrayAdapter<String> cipheradapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Cipher);
@@ -130,33 +138,8 @@ public class Activity_Dashboard extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spposition = position;
-                if (position == 1) {
-                    ascii();
-                }
-                if (position == 2) {
-                    binary();
-                }
-                if (position == 3) {
-                    caesar();
-                }
-                if (position == 4) {
-                    hexaDecimal();
-                }
-                if (position == 5) {
-                    rearrangeWordSentence();
-                }
-                if (position == 6) {
-                    rearrangeWord();
-                }
-                if (position == 7) {
-                    atbash();
-                }
-                if (position == 8) {
-                    affine();
-                }
-                if (position == 9) {
-                    LetterNumber();
-                }
+                position();
+
             }
 
             @Override
@@ -172,8 +155,12 @@ public class Activity_Dashboard extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tvCipherText.setText("");
-                spCipherMethod.setSelection(0);
+                if (etPlainText.getText().toString().isEmpty()) {
+                    tvCipherText.setText("");
+                    spCipherMethod.setSelection(0);
+                }else{
+                    position();
+                }
             }
 
             @Override
@@ -198,9 +185,9 @@ public class Activity_Dashboard extends AppCompatActivity {
             intent.setAction(Intent.ACTION_SEND);
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_TEXT,
-                    "Cipher Decoder\n\nPlain Text :-\n" + etPlainText.getText().toString() + "\n\n"
-                            + "Cipher Method :-\n" + spCipherMethod.getSelectedItemPosition() + "\n\n"
-                    + "Cipher Result :-\n" + tvCipherText.getText().toString());
+                    "Cipher Decoder\n\nPlain Text :- " + etPlainText.getText().toString() + "\n\n"
+                            + "Cipher Method :- " + spCipherMethod.getSelectedItem() + "\n\n"
+                    + "Cipher Result :- " + tvCipherText.getText().toString());
             startActivity(intent);
         }
         if (item.getItemId() == R.id.menu_developer) {
@@ -217,7 +204,8 @@ public class Activity_Dashboard extends AppCompatActivity {
         imgcopy = findViewById(R.id.dashboard_et_copy);
         imgpaste= findViewById(R.id.dashboard_et_paste);
         imgcancel= findViewById(R.id.dashboard_et_cancel);
-        imgcopy1 = findViewById(R.id.dashboard_tv_copy);;
+        imgcopy1 = findViewById(R.id.dashboard_tv_copy);
+        dialog=new Dialog(this);
     }
 
     @Override
@@ -232,6 +220,35 @@ public class Activity_Dashboard extends AppCompatActivity {
                 }
                 break;
             }
+        }
+    }
+    public void position(){
+        if (spposition == 1) {
+            ascii();
+        }
+        if (spposition == 2) {
+            binary();
+        }
+        if (spposition == 3) {
+            caesar();
+        }
+        if (spposition == 4) {
+            hexaDecimal();
+        }
+        if (spposition == 5) {
+            rearrangeWordSentence();
+        }
+        if (spposition == 6) {
+            rearrangeWord();
+        }
+        if (spposition == 7) {
+            atbash();
+        }
+        if (spposition == 8) {
+            affine();
+        }
+        if (spposition == 9) {
+            LetterNumber();
         }
     }
 
@@ -262,22 +279,38 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void caesar() {
-//        final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
-//        String plaintext = etPlainText.getText().toString().toLowerCase();
-//        String shiftkey = etshiftkey.getText().toString();
-//        if (TextUtils.isEmpty(shiftkey) || Integer.parseInt(shiftkey) > 26) {
-//            etshiftkey.setError("Enter Proper Shift Key Value");
-//        } else {
-//            int shiftkeyval = Integer.parseInt(shiftkey);
-//            StringBuilder ciphertext=new StringBuilder();
-//            for (int i = 0; i < plaintext.length(); i++) {
-//                int charposition = ALPHABET.indexOf(plaintext.charAt(i));
-//                int keyval = (shiftkeyval + charposition) % 26;
-//                char replaceval = ALPHABET.charAt(keyval);
-//                ciphertext.append(replaceval);
-//            }
-//            tvCipherText.setText(ciphertext);
-//        }
+        dialog.setContentView(R.layout.dialog_caesar);
+        etcaesarkey=dialog.findViewById(R.id.dialog_et);
+        btncaesar=dialog.findViewById(R.id.dialog_btn);
+        dialog.show();
+        btncaesar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=getIntent();
+                intent.putExtra("caesarkey",etcaesarkey.getText().toString());
+                dialog.dismiss();
+                final Intent caesarintent=getIntent();
+                final String caesarkey=caesarintent.getStringExtra("caesarkey");
+
+                final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+                String plaintext = etPlainText.getText().toString().toLowerCase();
+                String shiftkey = caesarkey;
+                if (TextUtils.isEmpty(shiftkey)) {
+                    tvCipherText.setText(plaintext);
+                    Toast.makeText(getApplicationContext(), "Key value is not defined", Toast.LENGTH_LONG).show();
+                } else {
+                    int shiftkeyval = Integer.parseInt(shiftkey);
+                    StringBuilder ciphertext=new StringBuilder();
+                    for (int i = 0; i < plaintext.length(); i++) {
+                        int charposition = ALPHABET.indexOf(plaintext.charAt(i));
+                        int keyval = (shiftkeyval + charposition) % 26;
+                        char replaceval = ALPHABET.charAt(keyval);
+                        ciphertext.append(replaceval);
+                    }
+                    tvCipherText.setText(ciphertext);
+                }
+            }
+        });
     }
 
     public void hexaDecimal() {
@@ -350,27 +383,44 @@ public class Activity_Dashboard extends AppCompatActivity {
     }
 
     public void affine() {
-//        String plaintext = etPlainText.getText().toString();
-//        char[] msg = plaintext.toCharArray();
-//        String shiftkey = etshiftkey.getText().toString();
-//        String shiftkey1 = etshiftkey1.getText().toString();
-//        String cipher = "";
-//        if (TextUtils.isEmpty(shiftkey)) {
-//            etshiftkey.setError("Enter Proper Shift Key Value");
-//
-//        }
-//        if (TextUtils.isEmpty(shiftkey1)) {
-//            etshiftkey1.setError("Enter Proper Shift Key Value");
-//        } else {
-//            int number = Integer.parseInt(shiftkey);
-//            int number1 = Integer.parseInt(shiftkey1);
-//            for (int i = 0; i < plaintext.length(); i++) {
-//                if (msg[i] != ' ') {
-//                    cipher = cipher + (char) ((((number * (msg[i] - 'A') + number1) % 26) + 'A')) + " ";
-//                }
-//            }
-//            tvCipherText.setText(cipher);
-//        }
+        dialog.setContentView(R.layout.dialog_affine);
+        etaffinekey1=dialog.findViewById(R.id.dialog_et1);
+        etaffinekey2=dialog.findViewById(R.id.dialog_et2);
+        btnaffine=dialog.findViewById(R.id.dialog_btn);
+        dialog.show();
+        btnaffine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=getIntent();
+                intent.putExtra("affinekey1",etaffinekey1.getText().toString());
+                intent.putExtra("affinekey2",etaffinekey2.getText().toString());
+                dialog.dismiss();
+                final Intent affineintent=getIntent();
+                final String affinekey1=affineintent.getStringExtra("affinekey1");
+                final String affinekey2=affineintent.getStringExtra("affinekey2");
+
+                String plaintext = etPlainText.getText().toString();
+                char[] msg = plaintext.toCharArray();
+                String shiftkey1 = affinekey1;
+                String shiftkey2 = affinekey2;
+                String cipher = "";
+
+                if (TextUtils.isEmpty(shiftkey1) || TextUtils.isEmpty(shiftkey2)) {
+                    tvCipherText.setText(plaintext);
+                    Toast.makeText(getApplicationContext(), "Key value is not defined", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    int number1 = Integer.parseInt(shiftkey1);
+                    int number2 = Integer.parseInt(shiftkey2);
+                    for (int i = 0; i < plaintext.length(); i++) {
+                        if (msg[i] != ' ') {
+                            cipher = cipher + (char) ((((number1 * (msg[i] - 'A') + number2) % 26) + 'A')) + " ";
+                        }
+                    }
+                    tvCipherText.setText(cipher);
+                }
+            }
+        });
     }
 
     public void LetterNumber() {
